@@ -6,7 +6,10 @@ const { parseMegaMillions, parsePowerball } = require('./parser');
 const wait = ms => new Promise(res => setTimeout(res, ms));
 
 (async () => {
-  const browser = await puppeteer.launch({ headless: "new" });
+const browser = await puppeteer.launch({
+  headless: "new",
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
+});
   const page = await browser.newPage();
 
   // --- Mega Millions ---
