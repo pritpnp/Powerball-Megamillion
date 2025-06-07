@@ -1,0 +1,28 @@
+{
+  "megaMillions": {
+    "numbers": [
+      16,
+      40,
+      54,
+      56,
+      57,
+      3
+    ],
+    "date": "June 6, 2025 Drawing",
+    "nextDrawing": "Tuesday, June 10, 2025",
+    "nextJackpot": "$243 Million"
+  },
+  "powerball": {
+    "numbers": [
+      5,
+      17,
+      23,
+      35,
+      45,
+      24
+    ],
+    "date": "June 4, 2025 Drawing",
+    "nextDrawing": "Saturday, June 7, 2025",
+    "nextJackpot": "$44 Million"
+  }
+}

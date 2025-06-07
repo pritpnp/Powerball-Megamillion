@@ -1,0 +1,110 @@
+// parser.js
+
+function parseMegaMillions(rawText) {
+  const lines = rawText
+    .trim()
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line.length > 0);
+
+  const winIndex = lines.findIndex(line => line.toLowerCase().includes("winning numbers"));
+  if (winIndex === -1) throw new Error("❌ Mega Millions 'Winning Numbers' line not found.");
+
+  // Read 6 numbers from the next few lines
+  let nums = [];
+  let i = winIndex + 1;
+  while (i < lines.length && nums.length < 6) {
+    const parts = lines[i].split(/\s+/).map(n => parseInt(n)).filter(n => !isNaN(n));
+    nums.push(...parts);
+    i++;
+  }
+  if (nums.length < 6) throw new Error("❌ Mega Millions winning numbers incomplete.");
+
+  // Date line (e.g., "Friday, 6/6/2025")
+  const dateLine = lines.find(line => /^[A-Za-z]+,\s*\d{1,2}\/\d{1,2}\/\d{4}$/.test(line));
+  if (!dateLine) throw new Error("❌ Mega Millions date line not found.");
+  const [_, drawMonth, drawDay, drawYear] = dateLine.match(/[A-Za-z]+,\s*(\d{1,2})\/(\d{1,2})\/(\d{4})/) || [];
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+                      "July", "August", "September", "October", "November", "December"];
+  const formattedDate = `${monthNames[parseInt(drawMonth) - 1]} ${drawDay}, ${drawYear} Drawing`;
+
+  // Next Drawing line
+  const nextDrawIndex = lines.findIndex(line => line.toLowerCase().includes("next drawing:"));
+  if (nextDrawIndex === -1 || nextDrawIndex + 1 >= lines.length)
+    throw new Error("❌ Mega Millions next draw line not found.");
+  const nextDrawLine = lines[nextDrawIndex + 1];
+  const [dayOfWeek, datePart] = nextDrawLine.split(',').map(s => s.trim());
+  const [monthNum, dayNum] = datePart.split('/').map(n => parseInt(n));
+  const formattedNextDraw = `${dayOfWeek}, ${monthNames[monthNum - 1]} ${dayNum}, ${drawYear}`;
+
+  // Jackpot
+  const jackpotIndex = lines.findIndex(line => line.toLowerCase().includes("next estimated jackpot"));
+  if (jackpotIndex === -1 || jackpotIndex + 1 >= lines.length)
+    throw new Error("❌ Mega Millions jackpot line not found.");
+  const jackpotLine = lines[jackpotIndex + 1];
+
+  return {
+    numbers: nums,
+    date: formattedDate,
+    nextDrawing: formattedNextDraw,
+    nextJackpot: jackpotLine
+  };
+}
+
+function parsePowerball(rawText) {
+  const lines = rawText
+    .trim()
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line.length > 0);
+
+  const winIndex = lines.findIndex(line => line.toLowerCase().includes("winning numbers"));
+  if (winIndex === -1) throw new Error("❌ Powerball 'Winning Numbers' line not found.");
+
+  const dateLine = lines[winIndex + 1];
+  const [_, monthAbbr, day, year] = dateLine.match(/[A-Za-z]+,\s([A-Za-z]+)\s(\d{1,2}),\s(\d{4})/) || [];
+  const fullMonths = {
+    Jan: "January", Feb: "February", Mar: "March", Apr: "April",
+    May: "May", Jun: "June", Jul: "July", Aug: "August",
+    Sep: "September", Oct: "October", Nov: "November", Dec: "December"
+  };
+  const formattedDate = `${fullMonths[monthAbbr]} ${day}, ${year} Drawing`;
+
+  // Grab the 6 numbers below the date
+  let nums = [];
+  for (let i = winIndex + 2; i < lines.length && nums.length < 6; i++) {
+    const n = parseInt(lines[i]);
+    if (!isNaN(n)) nums.push(n);
+  }
+  if (nums.length < 6) throw new Error("❌ Powerball winning numbers incomplete.");
+
+  // Next Drawing line
+  const nextDrawIndex = lines.findIndex(line => line.toLowerCase().includes("next drawing"));
+  if (nextDrawIndex === -1 || nextDrawIndex + 1 >= lines.length)
+    throw new Error("❌ Powerball next draw line not found.");
+  const nextDrawDateLine = lines[nextDrawIndex + 1];
+  const [__, nextDayAbbr, nextMonthAbbr, nextDay, nextYear] =
+    nextDrawDateLine.match(/^([A-Za-z]{3}), ([A-Za-z]{3}) (\d{1,2}), (\d{4})$/) || [];
+
+  const fullDays = {
+    Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday",
+    Fri: "Friday", Sat: "Saturday", Sun: "Sunday"
+  };
+
+  const nextDrawFormatted = `${fullDays[nextDayAbbr]}, ${fullMonths[nextMonthAbbr]} ${nextDay}, ${nextYear}`;
+
+  // Jackpot
+  const jackpotIndex = lines.findIndex(line => line.toLowerCase().includes("estimated jackpot"));
+  if (jackpotIndex === -1 || jackpotIndex + 1 >= lines.length)
+    throw new Error("❌ Powerball jackpot line not found.");
+  const jackpotLine = lines[jackpotIndex + 1];
+
+  return {
+    numbers: nums,
+    date: formattedDate,
+    nextDrawing: nextDrawFormatted,
+    nextJackpot: jackpotLine
+  };
+}
+
+module.exports = { parseMegaMillions, parsePowerball };
