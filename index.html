@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lottery Winning Numbers</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+    }
+    .container {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      margin: auto;
+    }
+    .container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .number {
+      position: absolute;
+      font-size: 50px;
+      font-weight: bold;
+      font-family: 'Times New Roman', serif;
+      color: black;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .mega-last {
+      color: #243E92;
+    }
+    .powerball-last {
+      color: white;
+    }
+    .date-text {
+      position: absolute;
+      font-size: 75px;
+      font-weight: bold;
+      font-family: 'Times New Roman', serif;
+      color: white;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .next-drawing-text {
+      position: absolute;
+      font-size: 75px;
+      font-weight: bold;
+      font-family: 'Times New Roman', serif;
+      color: white;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .next-jackpot-text {
+      position: absolute;
+      font-size: 100px;
+      font-weight: bold;
+      font-family: 'Times New Roman', serif;
+      color: white;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <img src="123.png" alt="Lottery Background" />
+  </div>
+
+  <script>
+    // === ✅ EASY CONFIG SECTION - EDIT ONLY THIS PART ===
+    const megaMillions = {
+  "numbers": [
+    16,
+    40,
+    54,
+    56,
+    57,
+    3
+  ],
+  "date": "June 6, 2025 Drawing",
+  "nextDrawing": "Tuesday, June 10, 2025",
+  "nextJackpot": "$243 Million"
+};
+
+    const powerball = {
+  "numbers": [
+    5,
+    17,
+    23,
+    35,
+    45,
+    24
+  ],
+  "date": "June 4, 2025 Drawing",
+  "nextDrawing": "Saturday, June 7, 2025",
+  "nextJackpot": "$44 Million"
+};
+    // === ✅ END CONFIG SECTION ===
+
+    const container = document.querySelector('.container');
+
+    const megaPositions = [
+      {x: 100, y: 519},
+      {x: 252, y: 519},
+      {x: 404, y: 519},
+      {x: 556, y: 519},
+      {x: 708, y: 519},
+      {x: 860, y: 519}
+    ];
+
+    const powerballPositions = [
+      {x: 1058, y: 519},
+      {x: 1210, y: 519},
+      {x: 1362, y: 519},
+      {x: 1514, y: 519},
+      {x: 1666, y: 519},
+      {x: 1818, y: 519}
+    ];
+
+    // Draw helper functions
+    function createTextDiv(text, className, x, y) {
+      const div = document.createElement('div');
+      div.className = className;
+      div.style.left = x + 'px';
+      div.style.top = y + 'px';
+      div.textContent = text;
+      return div;
+    }
+
+    function drawNumbers(numbers, positions, lastClassName) {
+      numbers.forEach((num, i) => {
+        const className = 'number ' + (i === numbers.length - 1 ? lastClassName : '');
+        container.appendChild(createTextDiv(num, className, positions[i].x, positions[i].y));
+      });
+    }
+
+    // Render everything
+    drawNumbers(megaMillions.numbers, megaPositions, 'mega-last');
+    drawNumbers(powerball.numbers, powerballPositions, 'powerball-last');
+
+    container.appendChild(createTextDiv(megaMillions.date, 'date-text', 481, 658));
+    container.appendChild(createTextDiv(powerball.date, 'date-text', 1438, 658));
+
+    container.appendChild(createTextDiv(megaMillions.nextDrawing, 'next-drawing-text', 479, 890));
+    container.appendChild(createTextDiv(powerball.nextDrawing, 'next-drawing-text', 1439, 890));
+
+    container.appendChild(createTextDiv(megaMillions.nextJackpot, 'next-jackpot-text', 480, 1004));
+    container.appendChild(createTextDiv(powerball.nextJackpot, 'next-jackpot-text', 1439, 1004));
+  </script>
+
+</body>
+</html>
