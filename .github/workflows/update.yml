@@ -1,16 +1,16 @@
 name: Daily Lottery Update
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '0 11 * * *'  # Runs daily at 7am ET
-  workflow_dispatch:       # Optional: allows you to run it manually
+    - cron: '0 11 * * *'  # runs every day at 7AM Eastern (11 UTC)
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repo
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Setup Node
@@ -18,24 +18,23 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Puppeteer dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libx11-dev libxkbcommon-x11-0 libgtk-3-0 libnss3 libxss1 libasound2
+      - name: Install Dependencies
+        run: npm ci
 
-      - name: Install Puppeteer
-        run: npm install puppeteer
-
-      - name: Run generate.js
-        run: node generate.js
-
-      - name: Run updateIndex.js
-        run: node updateIndex.js
+      - name: Run Script inside Puppeteer-ready container
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/puppeteer/puppeteer:latest
+          options: -v ${{ github.workspace }}:/work -w /work
+          run: |
+            npm install
+            node generate.js
+            node updateIndex.js
 
       - name: Commit and Push
         run: |
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
-          git add index.html
-          git commit -m "🔄 Auto update"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add index.html lottery.json
+          git commit -m "📅 Daily auto update" || echo "No changes to commit"
           git push
