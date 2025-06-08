@@ -3,7 +3,7 @@ name: Daily Lottery Update
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 5 * * *'  # runs every day at 1AM Eastern (5 UTC)
+    - cron: '0 12 * * *'  # runs every day at 8AM Eastern (12 UTC)
 
 jobs:
   build:
