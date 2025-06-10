@@ -209,12 +209,12 @@
     drawNumbers(powerball.numbers, powerballPositions, 'powerball-last');
 
     // Drawing date split into two lines, with "Drawing" smaller (FLEX version, prevents overlap)
-    createDrawingDateFlexBlock(megaMillions.date, 481, 455);
-    createDrawingDateFlexBlock(powerball.date, 1438, 455);
+    createDrawingDateFlexBlock(megaMillions.date, 481, 398);
+    createDrawingDateFlexBlock(powerball.date, 1438, 398);
 
     // Next Drawing (FLEX version, prevents overlap)
-    createNextDrawingFlexBlock(megaMillions.nextDrawing, 481, 790);
-    createNextDrawingFlexBlock(powerball.nextDrawing, 1438, 790);
+    createNextDrawingFlexBlock(megaMillions.nextDrawing, 481, 760);
+    createNextDrawingFlexBlock(powerball.nextDrawing, 1438, 760);
 
     // Jackpot (keep at the bottom, absolute for both sides)
     container.appendChild(createTextDiv(megaMillions.nextJackpot, 'next-jackpot-text', 480, 1004));
