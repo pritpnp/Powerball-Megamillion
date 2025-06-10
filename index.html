@@ -170,7 +170,7 @@
       const day = text.substring(0, firstComma).trim();
       const date = text.substring(firstComma + 1).trim();
       const dayDiv = createTextDiv(day, classNamePrefix + '-day', x, yBase);
-      const dateDiv = createTextDiv(date, classNamePrefix + '-date', x, yBase + 80);
+      const dateDiv = createTextDiv(date, classNamePrefix + '-date', x, yBase + 90);
       container.appendChild(dayDiv);
       container.appendChild(dateDiv);
     }
@@ -197,8 +197,8 @@
     createDrawingDateBlock(powerball.date, 1438, 455, 'drawing-date');
 
     // Next Drawing (large, right below date)
-    createNextDrawingBlock(megaMillions.nextDrawing, 481, 810, 'next-drawing');
-    createNextDrawingBlock(powerball.nextDrawing, 1438, 810, 'next-drawing');
+    createNextDrawingBlock(megaMillions.nextDrawing, 481, 790, 'next-drawing');
+    createNextDrawingBlock(powerball.nextDrawing, 1438, 790, 'next-drawing');
 
     // Jackpot (keep at the bottom)
     container.appendChild(createTextDiv(megaMillions.nextJackpot, 'next-jackpot-text', 480, 1004));
