@@ -1,239 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Lottery Winning Numbers</title>
-  <style>
-    body {
-      margin: 0;
-      background: #000;
-    }
-    .container {
-      position: relative;
-      width: 1920px;
-      height: 1080px;
-      margin: auto;
-    }
-    .container img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .number {
-      position: absolute;
-      font-size: 50px;
-      font-weight: bold;
-      font-family: 'Times New Roman', serif;
-      color: black;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
-    .mega-last {
-      color: #243E92;
-    }
-    .powerball-last {
-      color: white;
-    }
-    /* Flex blocks for all multiline info */
-    .flex-block {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      pointer-events: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .drawing-date-block {
-      width: 0; /* shrink to content */
-      pointer-events: none;
-    }
-    .drawing-date-main {
-      font-size: 100px;
-      font-weight: bold;
-      font-family: 'Times New Roman', serif;
-      color: white;
-      white-space: nowrap;
-      line-height: 1.08;
-    }
-    .drawing-date-sub {
-      font-size: 45px;
-      font-weight: bold;
-      font-family: 'Times New Roman', serif;
-      color: white;
-      white-space: nowrap;
-      line-height: 1.08;
-    }
-    .next-drawing-block {
-      width: 0;
-      pointer-events: none;
-    }
-    .next-drawing-day,
-    .next-drawing-date {
-      font-size: 80px;
-      font-weight: bold;
-      font-family: 'Times New Roman', serif;
-      color: white;
-      line-height: 1.1;
-      white-space: nowrap;
-    }
-    .next-jackpot-text {
-      position: absolute;
-      font-size: 100px;
-      font-weight: bold;
-      font-family: 'Times New Roman', serif;
-      color: white;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      white-space: nowrap;
-    }
-  </style>
-</head>
-<body>
+<script>
+  // === CONFIG SECTION ===
+  const megaMillions = {
+    "numbers": [10, 11, 14, 38, 45, 24],
+    "date": "June 10, 2025 Drawing",
+    "nextDrawing": "Friday, June 13, 2025",
+    "nextJackpot": "$264 Million"
+  };
 
-  <div class="container">
-    <img src="123.png" alt="Lottery Background" />
-  </div>
+  const powerball = {
+    "numbers": [30, 33, 40, 43, 52, 25],
+    "date": "June 9, 2025 Drawing",
+    "nextDrawing": "Wednesday, June 11, 2025",
+    "nextJackpot": "$65 Million"
+  };
+  // === END CONFIG SECTION ===
 
-  <script>
-    // === CONFIG SECTION ===
-    const megaMillions = {
-  "numbers": [
-    10,
-    11,
-    14,
-    38,
-    45,
-    24
-  ],
-  "date": "June 10, 2025 Drawing",
-  "nextDrawing": "Friday, June 13, 2025",
-  "nextJackpot": "$264 Million"
-};
+  const container = document.querySelector('.container');
 
-    const powerball = {
-  "numbers": [
-    30,
-    33,
-    40,
-    43,
-    52,
-    25
-  ],
-  "date": "June 9, 2025 Drawing",
-  "nextDrawing": "Wednesday, June 11, 2025",
-  "nextJackpot": "$65 Million"
-};
-    // === END CONFIG SECTION ===
+  // Ball positions
+  const megaPositions = [
+    {x: 100, y: 615},
+    {x: 252, y: 615},
+    {x: 404, y: 615},
+    {x: 556, y: 615},
+    {x: 708, y: 615},
+    {x: 860, y: 615}
+  ];
 
-    const container = document.querySelector('.container');
+  const powerballPositions = [
+    {x: 1058, y: 615},
+    {x: 1210, y: 615},
+    {x: 1362, y: 615},
+    {x: 1514, y: 615},
+    {x: 1666, y: 615},
+    {x: 1818, y: 615}
+  ];
 
-    // Ball positions
-    const megaPositions = [
-      {x: 100, y: 615},
-      {x: 252, y: 615},
-      {x: 404, y: 615},
-      {x: 556, y: 615},
-      {x: 708, y: 615},
-      {x: 860, y: 615}
-    ];
+  function createTextDiv(text, className, x, y) {
+    const div = document.createElement('div');
+    div.className = className;
+    div.style.left = x + 'px';
+    div.style.top = y + 'px';
+    div.textContent = text;
+    return div;
+  }
 
-    const powerballPositions = [
-      {x: 1058, y: 615},
-      {x: 1210, y: 615},
-      {x: 1362, y: 615},
-      {x: 1514, y: 615},
-      {x: 1666, y: 615},
-      {x: 1818, y: 615}
-    ];
+  function drawNumbers(numbers, positions, lastClassName) {
+    numbers.forEach((num, i) => {
+      const className = 'number ' + (i === numbers.length - 1 ? lastClassName : '');
+      container.appendChild(createTextDiv(num, className, positions[i].x, positions[i].y));
+    });
+  }
 
-    function createTextDiv(text, className, x, y) {
-      const div = document.createElement('div');
-      div.className = className;
-      div.style.left = x + 'px';
-      div.style.top = y + 'px';
-      div.textContent = text;
-      return div;
-    }
+  // Flex block for Drawing Date (date and "Drawing")
+  function createDrawingDateFlexBlock(text, x, y) {
+    const lastSpaceIndex = text.lastIndexOf(' ');
+    const date = text.substring(0, lastSpaceIndex).trim();
+    const word = text.substring(lastSpaceIndex + 1).trim();
 
-    function drawNumbers(numbers, positions, lastClassName) {
-      numbers.forEach((num, i) => {
-        const className = 'number ' + (i === numbers.length - 1 ? lastClassName : '');
-        container.appendChild(createTextDiv(num, className, positions[i].x, positions[i].y));
-      });
-    }
+    const block = document.createElement('div');
+    block.className = 'flex-block drawing-date-block';
+    block.style.left = `${x}px`;
+    block.style.top = `${y}px`;
+    block.style.transform = 'translate(-50%, 0)';
+    block.style.position = 'absolute';
 
-    // Robust: Flex block for Drawing Date (date and "Drawing")
-    function createDrawingDateFlexBlock(text, x, y) {
-      const lastSpaceIndex = text.lastIndexOf(' ');
-      const date = text.substring(0, lastSpaceIndex).trim();
-      const word = text.substring(lastSpaceIndex + 1).trim();
+    const dateDiv = document.createElement('div');
+    dateDiv.className = 'drawing-date-main';
+    dateDiv.textContent = date;
 
-      const block = document.createElement('div');
-      block.className = 'flex-block drawing-date-block';
-      block.style.left = `${x}px`;
-      block.style.top = `${y}px`;
-      block.style.transform = 'translate(-50%, 0)';
-      block.style.position = 'absolute';
+    const drawingDiv = document.createElement('div');
+    drawingDiv.className = 'drawing-date-sub';
+    drawingDiv.textContent = word;
 
-      const dateDiv = document.createElement('div');
-      dateDiv.className = 'drawing-date-main';
-      dateDiv.textContent = date;
+    block.appendChild(dateDiv);
+    block.appendChild(drawingDiv);
 
-      const drawingDiv = document.createElement('div');
-      drawingDiv.className = 'drawing-date-sub';
-      drawingDiv.textContent = word;
+    container.appendChild(block);
+  }
 
-      block.appendChild(dateDiv);
-      block.appendChild(drawingDiv);
+  // Helper: returns true if the date is today (local)
+  function isToday(dateStr) {
+    // Expects dateStr like "June 13, 2025" or "June 13, 2025"
+    const date = new Date(dateStr.trim());
+    const now = new Date();
+    return (
+      date.getFullYear() === now.getFullYear() &&
+      date.getMonth() === now.getMonth() &&
+      date.getDate() === now.getDate()
+    );
+  }
 
-      container.appendChild(block);
-    }
+  // Flex block for Next Drawing (with "TONIGHT" logic)
+  function createNextDrawingFlexBlock(text, x, y) {
+    const firstComma = text.indexOf(',');
+    if (firstComma === -1) return; // invalid format
 
-    // Robust: Flex block for Next Drawing (day and date)
-    function createNextDrawingFlexBlock(text, x, y) {
-      const firstComma = text.indexOf(',');
-      const day = text.substring(0, firstComma).trim();
-      const date = text.substring(firstComma + 1).trim();
+    const day = text.substring(0, firstComma).trim();
+    const dateStr = text.substring(firstComma + 1).trim(); // e.g., "June 13, 2025"
 
-      const block = document.createElement('div');
-      block.className = 'flex-block next-drawing-block';
-      block.style.left = `${x}px`;
-      block.style.top = `${y}px`;
-      block.style.transform = 'translate(-50%, 0)';
-      block.style.position = 'absolute';
+    // Show "TONIGHT" if date is today
+    const showLabel = isToday(dateStr) ? "TONIGHT" : day;
 
-      const dayDiv = document.createElement('div');
-      dayDiv.className = 'next-drawing-day';
-      dayDiv.textContent = day;
+    const block = document.createElement('div');
+    block.className = 'flex-block next-drawing-block';
+    block.style.left = `${x}px`;
+    block.style.top = `${y}px`;
+    block.style.transform = 'translate(-50%, 0)';
+    block.style.position = 'absolute';
 
-      const dateDiv = document.createElement('div');
-      dateDiv.className = 'next-drawing-date';
-      dateDiv.textContent = date;
+    const dayDiv = document.createElement('div');
+    dayDiv.className = 'next-drawing-day';
+    dayDiv.textContent = showLabel;
 
-      block.appendChild(dayDiv);
-      block.appendChild(dateDiv);
+    const dateDiv = document.createElement('div');
+    dateDiv.className = 'next-drawing-date';
+    dateDiv.textContent = dateStr;
 
-      container.appendChild(block);
-    }
+    block.appendChild(dayDiv);
+    block.appendChild(dateDiv);
 
-    // Draw numbers
-    drawNumbers(megaMillions.numbers, megaPositions, 'mega-last');
-    drawNumbers(powerball.numbers, powerballPositions, 'powerball-last');
+    container.appendChild(block);
+  }
 
-    // Drawing date split into two lines, with "Drawing" smaller (FLEX version, prevents overlap)
-    createDrawingDateFlexBlock(megaMillions.date, 481, 398);
-    createDrawingDateFlexBlock(powerball.date, 1438, 398);
+  // Draw numbers
+  drawNumbers(megaMillions.numbers, megaPositions, 'mega-last');
+  drawNumbers(powerball.numbers, powerballPositions, 'powerball-last');
 
-    // Next Drawing (FLEX version, prevents overlap)
-    createNextDrawingFlexBlock(megaMillions.nextDrawing, 481, 760);
-    createNextDrawingFlexBlock(powerball.nextDrawing, 1438, 760);
+  // Drawing date split into two lines, with "Drawing" smaller (FLEX version, prevents overlap)
+  createDrawingDateFlexBlock(megaMillions.date, 481, 398);
+  createDrawingDateFlexBlock(powerball.date, 1438, 398);
 
-    // Jackpot (keep at the bottom, absolute for both sides)
-    container.appendChild(createTextDiv(megaMillions.nextJackpot, 'next-jackpot-text', 480, 1004));
-    container.appendChild(createTextDiv(powerball.nextJackpot, 'next-jackpot-text', 1439, 1004));
-  </script>
+  // Next Drawing (FLEX version, prevents overlap)
+  createNextDrawingFlexBlock(megaMillions.nextDrawing, 481, 760);
+  createNextDrawingFlexBlock(powerball.nextDrawing, 1438, 760);
 
-</body>
-</html>
+  // Jackpot (keep at the bottom, absolute for both sides)
+  container.appendChild(createTextDiv(megaMillions.nextJackpot, 'next-jackpot-text', 480, 1004));
+  container.appendChild(createTextDiv(powerball.nextJackpot, 'next-jackpot-text', 1439, 1004));
+</script>
