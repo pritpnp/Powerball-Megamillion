@@ -190,35 +190,44 @@
 
     // Flex block for Next Drawing (with "TONIGHT" logic)
     function createNextDrawingFlexBlock(text, x, y) {
-      const firstComma = text.indexOf(',');
-      if (firstComma === -1) return;
+  const firstComma = text.indexOf(',');
+  if (firstComma === -1) return;
 
-      const day = text.substring(0, firstComma).trim();
-      const dateStr = text.substring(firstComma + 1).trim();
+  const day = text.substring(0, firstComma).trim();
+  const dateStr = text.substring(firstComma + 1).trim();
 
-      // Show "TONIGHT" if date is today
-      const showLabel = isToday(dateStr) ? "TONIGHT" : day;
+  const isTonight = isToday(dateStr);
 
-      const block = document.createElement('div');
-      block.className = 'flex-block next-drawing-block';
-      block.style.left = `${x}px`;
-      block.style.top = `${y}px`;
-      block.style.transform = 'translate(-50%, 0)';
-      block.style.position = 'absolute';
+  const block = document.createElement('div');
+  block.className = 'flex-block next-drawing-block';
+  block.style.left = `${x}px`;
+  block.style.top = `${y}px`;
+  block.style.transform = 'translate(-50%, 0)';
+  block.style.position = 'absolute';
 
-      const dayDiv = document.createElement('div');
-      dayDiv.className = 'next-drawing-day';
-      dayDiv.textContent = showLabel;
+  if (isTonight) {
+    const tonightDiv = document.createElement('div');
+    tonightDiv.className = 'next-drawing-day';
+    tonightDiv.textContent = "TONIGHT";
+    tonightDiv.style.fontSize = '130px'; // Make it bigger!
+    tonightDiv.style.letterSpacing = '10px';
+    tonightDiv.style.lineHeight = '1.1';
+    block.appendChild(tonightDiv);
+  } else {
+    const dayDiv = document.createElement('div');
+    dayDiv.className = 'next-drawing-day';
+    dayDiv.textContent = day;
 
-      const dateDiv = document.createElement('div');
-      dateDiv.className = 'next-drawing-date';
-      dateDiv.textContent = dateStr;
+    const dateDiv = document.createElement('div');
+    dateDiv.className = 'next-drawing-date';
+    dateDiv.textContent = dateStr;
 
-      block.appendChild(dayDiv);
-      block.appendChild(dateDiv);
+    block.appendChild(dayDiv);
+    block.appendChild(dateDiv);
+  }
 
-      container.appendChild(block);
-    }
+  container.appendChild(block);
+}
 
     // Draw numbers
     drawNumbers(megaMillions.numbers, megaPositions, 'mega-last');
