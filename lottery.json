@@ -14,15 +14,15 @@
   },
   "powerball": {
     "numbers": [
-      4,
-      35,
-      43,
+      13,
+      28,
+      44,
       52,
-      62,
-      12
+      55,
+      6
     ],
-    "date": "June 28, 2025 Drawing",
-    "nextDrawing": "Monday, June 30, 2025",
-    "nextJackpot": "$162 Million"
+    "date": "June 30, 2025 Drawing",
+    "nextDrawing": "Wednesday, July 2, 2025",
+    "nextJackpot": "$174 Million"
   }
 }
