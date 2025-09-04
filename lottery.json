@@ -14,15 +14,15 @@
   },
   "powerball": {
     "numbers": [
-      8,
-      23,
-      25,
-      40,
-      53,
-      5
+      3,
+      16,
+      29,
+      61,
+      69,
+      22
     ],
-    "date": "September 1, 2025 Drawing",
-    "nextDrawing": "Wednesday, September 3, 2025",
-    "nextJackpot": "$1.40 Billion"
+    "date": "September 3, 2025 Drawing",
+    "nextDrawing": "Saturday, September 6, 2025",
+    "nextJackpot": "$1.70 Billion"
   }
 }
