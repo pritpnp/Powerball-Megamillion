@@ -14,15 +14,15 @@
   },
   "powerball": {
     "numbers": [
-      5,
-      28,
-      34,
-      37,
+      11,
+      26,
+      27,
+      53,
       55,
-      17
+      12
     ],
-    "date": "January 19, 2026 Drawing",
-    "nextDrawing": "Wednesday, January 21, 2026",
-    "nextJackpot": "$209 Million"
+    "date": "January 21, 2026 Drawing",
+    "nextDrawing": "Saturday, January 24, 2026",
+    "nextJackpot": "$20 Million"
   }
 }
