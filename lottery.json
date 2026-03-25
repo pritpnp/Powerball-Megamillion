@@ -1,16 +1,16 @@
 {
   "megaMillions": {
     "numbers": [
-      11,
-      20,
-      51,
-      55,
-      63,
-      4
+      4,
+      13,
+      52,
+      53,
+      69,
+      10
     ],
-    "date": "March 20, 2026 Drawing",
-    "nextDrawing": "Tuesday, March 24, 2026",
-    "nextJackpot": "$60 Million"
+    "date": "March 24, 2026 Drawing",
+    "nextDrawing": "Friday, March 27, 2026",
+    "nextJackpot": "$5 Million"
   },
   "powerball": {
     "numbers": [
@@ -22,7 +22,7 @@
       1
     ],
     "date": "March 23, 2026 Drawing",
-    "nextDrawing": "Monday, March 23, 2026",
-    "nextJackpot": "$133 Million"
+    "nextDrawing": "Wednesday, March 25, 2026",
+    "nextJackpot": "$147 Million"
   }
 }
