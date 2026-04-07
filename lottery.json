@@ -14,15 +14,15 @@
   },
   "powerball": {
     "numbers": [
-      3,
-      6,
-      13,
-      41,
-      65,
-      1
+      7,
+      24,
+      37,
+      42,
+      57,
+      5
     ],
-    "date": "April 4, 2026 Drawing",
-    "nextDrawing": "Monday, April 6, 2026",
-    "nextJackpot": "$231 Million"
+    "date": "April 6, 2026 Drawing",
+    "nextDrawing": "Wednesday, April 8, 2026",
+    "nextJackpot": "$20 Million"
   }
 }
