@@ -1,50 +1,15 @@
-skip nav
-toggle menu
-WINNING NUMBERS
-HOW TO PLAY
-WHERE TO PLAY
-PLAY RESPONSIBLY
-WINNERS GALLERY
-ABOUT US
-FAQS
-MEDIA CENTER
- 
-NEWS RELEASES
- 
-CONTACT US
-Winning Numbers
-10 26 34 56 64 6
-TUESDAY, 5/19/2026
-View All Winners
-Watch the Drawing Past Winning Numbers
-Next Estimated Jackpot
-$296 Million
-CASH OPTION: $128.6 MILLION
-Next Drawing:
-Friday, 5/22 @ 11 p.m. ET
-Where to Play
- How to Play
-Tips to play responsibly
-Recent Winners
-$3 Million
-Dreaming in Missouri
-High Ridge, MO
-$5 Million
-Matt in Oklahoma
-Jenks, OK
-$2 Million
-Kentucky Dreamer
-Frankfort, KY
-View More Winners
-Mega Millions News
-$60 Million Mega Millions Fortune Finally Claimed
-The Luck of the Irish Quickly Brings Another Jackpot Win
-Ohio Jackpot-Winning Mega Millions Ticket Sold in Van Wert
-View More Stories
-Beware of Lottery Scams
+Invalid license key
+Requested URL: http://www.megamillions.com/
 
-Learn more to protect yourself from scammers fraudulently using the Mega Millions name.
+License status: License key expired
 
-Mega Millions logo
-Contact Us Media Center News Releases Privacy Policy 
-©2026 Mega Millions®. All rights reserved.
+If you're an administrator of this site, please go to Licenses and use the following domain name to add a valid license: www.megamillions.com
+
+
+How to get the license key
+If you own a license and want to generate a license key, please log in to the Client Portal to generate the license key.
+
+If you want to use the trial version of Kentico for evaluation purposes and wish to use a domain name other than “localhost” please contact sales@kentico.com.
+
+If you’d like to use the free edition of Kentico, please log in to the Client Portal to generate the license key for your domain.
+You can extend your trial period.
