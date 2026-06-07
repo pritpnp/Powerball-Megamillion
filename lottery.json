@@ -14,15 +14,15 @@
   },
   "powerball": {
     "numbers": [
-      14,
       16,
-      38,
+      32,
       55,
+      59,
       64,
-      12
+      3
     ],
-    "date": "June 3, 2026 Drawing",
-    "nextDrawing": "Saturday, June 6, 2026",
-    "nextJackpot": "$212 Million"
+    "date": "June 6, 2026 Drawing",
+    "nextDrawing": "Monday, June 8, 2026",
+    "nextJackpot": "$225 Million"
   }
 }
