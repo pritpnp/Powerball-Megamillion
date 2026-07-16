@@ -14,14 +14,14 @@
   },
   "powerball": {
     "numbers": [
-      5,
-      25,
-      36,
-      40,
-      48,
-      3
+      2,
+      7,
+      18,
+      29,
+      38,
+      16
     ],
-    "date": "July 13, 2026 Drawing",
+    "date": "July 15, 2026 Drawing",
     "nextDrawing": "Wednesday, July 15, 2026",
     "nextJackpot": "$498 Million"
   }
