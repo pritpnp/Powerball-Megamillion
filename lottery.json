@@ -1,16 +1,16 @@
 {
   "megaMillions": {
     "numbers": [
-      17,
+      1,
       20,
-      32,
-      54,
-      57,
-      23
+      30,
+      46,
+      68,
+      17
     ],
-    "date": "August 7, 2026 Drawing",
-    "nextDrawing": "Tuesday, August 11, 2026",
-    "nextJackpot": "$80 Million"
+    "date": "August 11, 2026 Drawing",
+    "nextDrawing": "Friday, August 14, 2026",
+    "nextJackpot": "$90 Million"
   },
   "powerball": {
     "numbers": [
@@ -23,6 +23,6 @@
     ],
     "date": "August 10, 2026 Drawing",
     "nextDrawing": "Wednesday, August 12, 2026",
-    "nextJackpot": "$975 Million"
+    "nextJackpot": "$1 Billion"
   }
 }
