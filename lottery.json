@@ -14,15 +14,15 @@
   },
   "powerball": {
     "numbers": [
-      10,
-      21,
-      58,
-      61,
-      64,
-      17
+      13,
+      31,
+      54,
+      57,
+      65,
+      23
     ],
-    "date": "August 19, 2026 Drawing",
-    "nextDrawing": "Saturday, August 22, 2026",
-    "nextJackpot": "$68 Million"
+    "date": "August 22, 2026 Drawing",
+    "nextDrawing": "Monday, August 24, 2026",
+    "nextJackpot": "$81 Million"
   }
 }
