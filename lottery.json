@@ -14,15 +14,15 @@
   },
   "powerball": {
     "numbers": [
-      16,
-      23,
-      32,
-      36,
-      54,
-      9
+      11,
+      13,
+      14,
+      21,
+      65,
+      19
     ],
-    "date": "October 5, 2026 Drawing",
-    "nextDrawing": "Wednesday, October 7, 2026",
-    "nextJackpot": "$485 Million"
+    "date": "October 7, 2026 Drawing",
+    "nextDrawing": "Saturday, October 10, 2026",
+    "nextJackpot": "$516 Million"
   }
 }
